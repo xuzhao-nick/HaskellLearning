@@ -28,8 +28,13 @@ Prelude> :type (>>=) @Maybe @Int
 
 (>>=) @Maybe @Int :: Maybe Int -> (Int -> Maybe b) -> Maybe b
 
-<h4>Add @IO with >>=
+<h4>Add @IO with >>=</h4>
 
 Prelude> :type (>>=) @IO
 (>>=) @IO :: IO a -> (a -> IO b) -> IO b
+
+<h4>Setup project</h4>
+Setup a project:
+
+
 
