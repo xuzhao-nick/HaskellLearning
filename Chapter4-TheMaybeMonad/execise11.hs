@@ -22,6 +22,8 @@ bindMaybe maybeValue aFunction =
 
 bindMaybe1 Nothing aFunction = Nothing
 bindMaybe1 (Just x) aFunction = aFunction x
+
+
 -- Usage Examples
 -- bindMaybe (cleanWhitespace "  abc") requireAlphaNum
 -- bindMaybe1 (cleanWhitespace "  abc") requireAlphaNum
