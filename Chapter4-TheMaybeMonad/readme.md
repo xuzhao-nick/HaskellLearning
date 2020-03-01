@@ -37,3 +37,7 @@ Prelude> :type (>>=) @IO
 Setup a project "validation-book":
 
 $ stack new validation-book simple
+
+<h4>Start GHCI</h4>
+
+$ stack repl
