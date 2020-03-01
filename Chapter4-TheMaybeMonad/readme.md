@@ -34,7 +34,6 @@ Prelude> :type (>>=) @IO
 (>>=) @IO :: IO a -> (a -> IO b) -> IO b
 
 <h4>Setup project</h4>
-Setup a project:
+Setup a project "validation-book":
 
-
-
+$ stack new validation-book simple
