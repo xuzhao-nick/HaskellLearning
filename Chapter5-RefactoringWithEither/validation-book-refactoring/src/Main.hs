@@ -2,7 +2,7 @@ module Main where
 import Data.Char
 
 cleanWhitespace :: String -> Either String String
-cleanWhitespace "" = Left Your password cannot be empty."
+cleanWhitespace "" = Left "Left Your password cannot be empty."
 cleanWhitespace (x : xs) =
     case (isSpace x) of
         True -> cleanWhitespace xs
@@ -23,24 +23,12 @@ checkPasswordLength password =
                      \than 20 characters."
         False -> Right password
 
-checkPassword :: String -> Maybe String
-checkPassword password =
-    case (cleanWhitespace password) of
-        Nothing -> Nothing
-        Just cleanedPassword ->
-            case (checkPasswordLength cleanedPassword) of
-                Nothing -> Nothing
-                Just cleanedPassword ->
-                    case (requireAlphaNum cleanedPassword) of
-                        Nothing -> Nothing
-                        Just cleanedPassword -> Just cleanedPassword
-
 validatePassword :: String -> Either String String
 validatePassword password =
     cleanWhitespace password
         >>= requireAlphaNum
         >>= checkPasswordLength
-              
+
 main :: IO ()
 main =
   do

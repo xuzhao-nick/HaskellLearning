@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/bin"
-libdir     = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/lib/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0-EsYiKdHaVnvJDjtGAU4dbT-validation-book-refactoring"
-dynlibdir  = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/lib/x86_64-osx-ghc-8.8.2"
-datadir    = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/share/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0"
-libexecdir = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/libexec/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0"
-sysconfdir = "/Users/nickxusmacbook/Documents/GitHub/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/831cff109dc83272cb21e8533730ef0215e1ddc8efc155dc07e48feb0c8cfc85/8.8.2/etc"
+bindir     = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/bin"
+libdir     = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/lib/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0-EsYiKdHaVnvJDjtGAU4dbT-validation-book-refactoring"
+dynlibdir  = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/lib/x86_64-osx-ghc-8.8.2"
+datadir    = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/share/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0"
+libexecdir = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/libexec/x86_64-osx-ghc-8.8.2/validation-book-refactoring-0.1.0.0"
+sysconfdir = "/Users/nickxu/Documents/github/HaskellLearning/Chapter5-RefactoringWithEither/validation-book-refactoring/.stack-work/install/x86_64-osx/7ea68ced89361af2acad58370196b696d0d9acfae763aa7b0cbdb83e5ca1c6e1/8.8.2/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "validation_book_refactoring_bindir") (\_ -> return bindir)
