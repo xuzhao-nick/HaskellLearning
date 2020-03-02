@@ -9,11 +9,12 @@ cleanWhitespace (x : xs) =
         False -> Just (x : xs)
 
 
-requireAlphaNum :: String -> Maybe String
+requireAlphaNum :: String -> Either String String
 requireAlphaNum xs =
     case (all isAlphaNum xs) of
-        False -> Nothing
-        True -> Just xs
+        False -> Left "Your password cannot contain \
+                      \white space or special characters."
+        True -> Right xs
 
 checkPasswordLength :: String -> Either String String
 checkPasswordLength password =
