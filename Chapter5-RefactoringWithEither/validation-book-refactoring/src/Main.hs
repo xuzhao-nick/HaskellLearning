@@ -15,11 +15,12 @@ requireAlphaNum xs =
         False -> Nothing
         True -> Just xs
 
-checkPasswordLength :: String -> Maybe String
+checkPasswordLength :: String -> Either String String
 checkPasswordLength password =
     case (length password > 20)  of
-        True -> Nothing
-        False -> Just password
+        True -> Left "Your password cannot be longer \
+                     \than 20 characters"
+        False -> Right password
 
 checkPassword :: String -> Maybe String
 checkPassword password =
