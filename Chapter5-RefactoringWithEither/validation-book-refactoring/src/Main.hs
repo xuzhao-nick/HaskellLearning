@@ -1,12 +1,12 @@
 module Main where
 import Data.Char
 
-cleanWhitespace :: String -> Maybe String
-cleanWhitespace "" = Nothing
+cleanWhitespace :: String -> Either String String
+cleanWhitespace "" = Left Your password cannot be empty."
 cleanWhitespace (x : xs) =
     case (isSpace x) of
         True -> cleanWhitespace xs
-        False -> Just (x : xs)
+        False -> Right (x : xs)
 
 
 requireAlphaNum :: String -> Either String String
@@ -20,7 +20,7 @@ checkPasswordLength :: String -> Either String String
 checkPasswordLength password =
     case (length password > 20)  of
         True -> Left "Your password cannot be longer \
-                     \than 20 characters"
+                     \than 20 characters."
         False -> Right password
 
 checkPassword :: String -> Maybe String
