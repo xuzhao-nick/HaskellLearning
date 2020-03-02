@@ -35,20 +35,12 @@ checkPassword password =
                         Nothing -> Nothing
                         Just cleanedPassword -> Just cleanedPassword
 
-validatePassword :: String -> String
+validatePassword :: String -> Either String String
 validatePassword password =
-    case (cleanWhitespace password) of
-        Nothing -> "Your password cannot be empty."
-        Just password2 ->
-            case (requireAlphaNum password2) of
-                Nothing -> "Your password cannot contain \
-                           \white space or special characters."
-                Just password3 ->
-                    case (checkPasswordLength password3) of
-                        Nothing -> "Your password cannot be \
-                                   \longer than 20 characters."
-                        Just password4 -> password4
-
+    cleanWhitespace password
+        >>= requireAlphaNum
+        >>= checkPasswordLength
+              
 main :: IO ()
 main =
   do
