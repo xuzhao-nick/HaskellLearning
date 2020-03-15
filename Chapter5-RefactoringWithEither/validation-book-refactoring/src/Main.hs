@@ -1,51 +1,34 @@
 module Main where
 import Data.Char
 
-cleanWhitespace :: String -> Maybe String
-cleanWhitespace "" = Nothing
+cleanWhitespace :: String -> Either String String
+cleanWhitespace "" = Left "Left Your password cannot be empty."
 cleanWhitespace (x : xs) =
     case (isSpace x) of
         True -> cleanWhitespace xs
-        False -> Just (x : xs)
+        False -> Right (x : xs)
 
 
-requireAlphaNum :: String -> Maybe String
+requireAlphaNum :: String -> Either String String
 requireAlphaNum xs =
     case (all isAlphaNum xs) of
-        False -> Nothing
-        True -> Just xs
+        False -> Left "Your password cannot contain \
+                      \white space or special characters."
+        True -> Right xs
 
-checkPasswordLength :: String -> Maybe String
+checkPasswordLength :: String -> Either String String
 checkPasswordLength password =
     case (length password > 20)  of
-        True -> Nothing
-        False -> Just password
+        True -> Left "Your password cannot be longer \
+                     \than 20 characters."
+        False -> Right password
 
-checkPassword :: String -> Maybe String
-checkPassword password =
-    case (cleanWhitespace password) of
-        Nothing -> Nothing
-        Just cleanedPassword ->
-            case (checkPasswordLength cleanedPassword) of
-                Nothing -> Nothing
-                Just cleanedPassword ->
-                    case (requireAlphaNum cleanedPassword) of
-                        Nothing -> Nothing
-                        Just cleanedPassword -> Just cleanedPassword
-
-validatePassword :: String -> String
+validatePassword :: String -> Either String String
 validatePassword password =
-    case (cleanWhitespace password) of
-        Nothing -> "Your password cannot be empty."
-        Just password2 ->
-            case (requireAlphaNum password2) of
-                Nothing -> "Your password cannot contain \
-                           \white space or special characters."
-                Just password3 ->
-                    case (checkPasswordLength password3) of
-                        Nothing -> "Your password cannot be \
-                                   \longer than 20 characters."
-                        Just password4 -> password4
+    cleanWhitespace password
+        >>= requireAlphaNum
+        >>= checkPasswordLength
+
 
 main :: IO ()
 main =
@@ -53,3 +36,30 @@ main =
     putStrLn "Please enter a password\n>"
     password <- getLine
     print(validatePassword password)
+
+printTestResult :: Either String () -> IO()
+printTestResult r =
+    case r of
+        Left err -> putStrLn err
+        Right () -> putStrLn "All tests passed."
+
+eq :: (Eq a, Show a) => Int -> a -> a -> Either String ()
+eq n actual expected =
+    case (actual == expected) of
+        True -> Right ()
+        False -> Left (unlines
+          [ "Test" ++ show n
+          , " Expected: " ++ show expected
+          , " But got:  " ++ show actual
+          ])
+
+test :: IO ()
+test = printTestResult $
+  do
+    eq 1 (checkPasswordLength "") (Right "")
+    eq 2 (checkPasswordLength "julielovesbooks")
+         (Right "julielovesbooks")
+    eq 3 (requireAlphaNum "julielovesbooks")
+              (Right "julielovesbooks")
+    eq 4 (cleanWhitespace "  julie")
+         (Right "julie")
