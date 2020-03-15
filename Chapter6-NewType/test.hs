@@ -14,6 +14,3 @@ x = "julielovesbooks"
 
 greet :: Username -> IO()
 greet username = print("Hello" ++ username)
-
-newtype Password = Password String deriving Show
-newtype Password = Password String
