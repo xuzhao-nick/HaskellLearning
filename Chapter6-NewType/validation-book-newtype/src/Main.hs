@@ -21,34 +21,33 @@ cleanWhitespace (x : xs) =
 requireAlphaNum :: String -> Either Error String
 requireAlphaNum xs =
     case (all isAlphaNum xs) of
-        False -> Left (Error "Your password cannot contain \
+        False ->  Left (Error "Your password cannot contain \
                       \white space or special characters.")
         True -> Right xs
 
-checkUsernameLength :: String -> Either Error Username
-checkUsernameLength name =
-    case (length name > 15)  of
-        True -> Left (Error "Username cannot be longer \
-                     \than 15 characters.")
-        False -> Right (Username name)
+checkLength :: Int -> String -> String -> Either Error String
+checkLength theLength string name =
+    case (length string > theLength) of
+        True -> Left (Error (name ++ " cannot be longer than " ++ (show theLength) ++ " characters."))
+        False -> Right string
 
-checkPasswordLength :: String -> Either Error Password
-checkPasswordLength password =
-    case (length password > 20)  of
-        True -> Left (Error "Your password cannot be longer \
-                     \than 20 characters.")
-        False -> Right (Password password)
 
-validatePassword :: Password -> Either Error Password
+checkUsernameLength :: String -> Either Error String
+checkUsernameLength name = (checkLength 15 name "Username")
+
+checkPasswordLength :: String -> Either Error String
+checkPasswordLength password = (checkLength 20 password "Password")
+
+validatePassword :: Password -> Either Error String
 validatePassword (Password password) =
     cleanWhitespace password -- String -> Either Error String
-        >>= requireAlphaNum  -- String -> Either Error Password
+        >>= requireAlphaNum  -- String -> Either Error String
         >>= checkPasswordLength -- String -> Either Error String
 
-validateUsername :: Username -> Either Error Username
+validateUsername :: Username -> Either Error String
 validateUsername (Username username) =
     cleanWhitespace username -- String -> Either Error String
-        >>= requireAlphaNum  -- String -> Either Error Password
+        >>= requireAlphaNum  -- String -> Either Error String
         >>= checkUsernameLength -- String -> Either Error String
 
 main :: IO ()
